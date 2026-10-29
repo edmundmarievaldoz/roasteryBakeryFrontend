@@ -12,7 +12,10 @@ div.CardContainer {
     border-radius: $radius-card;
     background: $color-surface;
     box-shadow: 0 1px 3px rgba(30, 27, 24, 0.06);
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
 
     &:hover {
       border-color: $color-accent;
