@@ -1,20 +1,15 @@
-import './RecipeCard.scss';
-import { Card } from '../../UI/Card';
+import "./RecipeCard.scss";
+import { Card } from "../../UI/Card";
 
-function RecipeCard ({recipe}) {
-    //initialisation
-    //state
-    //handlers
-    //view
-    return (
-
-        <div className="recipeCard" key={recipe.recipeID}>
-            <Card>
-            <p>{recipe.recipeName}</p>
-            </Card>
-        </div>
-
-    );
+function RecipeCard({ recipe }) {
+  return (
+    <div className="recipeCard">
+      <Card>
+        <span className="recipeCard__initial">{recipe.recipeName.charAt(0)}</span>
+        <span className="recipeCard__name">{recipe.recipeName}</span>
+      </Card>
+    </div>
+  );
 }
 
 export default RecipeCard;

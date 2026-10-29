@@ -1,27 +1,29 @@
+@use "../../styles/variables" as *;
+
 div.CardContainer {
-  border: 1px lightgray solid;
-  border-radius: 5px;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  background: whitesmoke;
 
   div.card {
-    width: 100%;
     height: 100%;
-    padding: 10px;
-    margin: 10px;
-    border: 1px lightgray solid;
-    border-radius: 5px;
-    box-shadow: 4px 4px 8px 4px lightgray;
-    background: white;
+    padding: 20px;
+    border: 1px solid $color-border;
+    border-radius: $radius-card;
+    background: $color-surface;
+    box-shadow: 0 1px 3px rgba(30, 27, 24, 0.06);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      border-color: $color-accent;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(30, 27, 24, 0.08);
+    }
 
     img {
       width: 100%;
       display: block;
-      border-radius: 0px 0px 3px 3px;
+      border-radius: 0 0 3px 3px;
     }
   }
 }

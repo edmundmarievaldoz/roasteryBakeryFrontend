@@ -1,12 +1,13 @@
-footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #C08552;
-    height: 50px;
-    margin: 0;
+@use "../../styles/variables" as *;
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-accent; 
+  height: 50px;
 
-    .p{
-        color: white;
-    }
+  p {
+    color: white;
+    font-size: 14px;
+  }
 }
