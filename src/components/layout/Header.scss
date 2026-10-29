@@ -1,0 +1,10 @@
+header{
+    background-color: #C08552;
+    min-height: 10vh;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    .title{color: white; text-align: center; margin: 0;}
+}
