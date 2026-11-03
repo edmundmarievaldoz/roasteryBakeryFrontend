@@ -1,19 +1,41 @@
 @use "../../styles/variables" as *;
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
 
-
 div.layout {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background: $color-ground;
   color: $color-ink;
+
+  .layout__bgIcon {
+    position: absolute;
+    left: 68%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 520px;
+    height: 520px;
+    color: $color-accent;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header,
+  main,
+  footer {
+    position: relative;
+    z-index: 1;
+  }
 
   main {
     flex: 1;
@@ -21,6 +43,11 @@ div.layout {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 32px;
-    box-sizing: border-box;
+  }
+
+  @media (max-width: 600px) {
+    .layout__bgIcon {
+      display: none;
+    }
   }
 }
