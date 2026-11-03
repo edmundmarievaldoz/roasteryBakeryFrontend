@@ -1,0 +1,47 @@
+@use "../../styles/variables" as *;
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.recipes__header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recipes__title {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.recipes__subtitle {
+  color: $color-muted;
+}
+
+.recipes__back {
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.recipes__newButton {
+  align-self: flex-start;
+  margin-top: 8px;
+  min-height: 44px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: $color-accent;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}

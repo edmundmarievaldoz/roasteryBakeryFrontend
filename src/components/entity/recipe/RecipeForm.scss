@@ -1,0 +1,153 @@
+@use "../../../styles/variables" as *;
+
+form.recipeForm {
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .recipeForm__panel {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-card;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .recipeForm__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid $color-border;
+    border-radius: 10px;
+    background: $color-surface;
+    color: $color-ink;
+    font: inherit;
+
+    &:focus {
+      outline: 2px solid $color-accent;
+      outline-offset: 1px;
+      border-color: $color-accent;
+    }
+  }
+
+  .recipeForm__divider {
+    border: none;
+    height: 1px;
+    background: $color-border;
+    margin: 10px 0;
+  }
+
+  .recipeForm__subtitle {
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .recipeForm__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px 60px 44px;
+    gap: 12px;
+    align-items: center;
+
+    &.recipeForm__row--labels {
+      font-size: 13px;
+      font-weight: 700;
+      color: $color-muted;
+    }
+  }
+
+  .recipeForm__unit {
+    color: $color-muted;
+  }
+
+  .recipeForm__remove {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid $color-border;
+    background: $color-surface;
+    color: $color-muted;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .recipeForm__add {
+    min-height: 48px;
+    border-radius: 10px;
+    border: 2px dashed $color-border;
+    background: transparent;
+    color: $color-accent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-accent;
+    }
+  }
+
+  .recipeForm__errors {
+    list-style: none;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: #FBEAEA;
+    color: #8A1F1F;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .recipeForm__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .recipeForm__button {
+    min-height: 44px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid $color-border;
+    background: $color-surface;
+    color: $color-ink;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+
+    &.recipeForm__button--primary {
+      background: $color-accent;
+      border-color: $color-accent;
+      color: white;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .recipeForm__row {
+      grid-template-columns: minmax(0, 1fr) 90px 44px 44px;
+    }
+  }
+}
