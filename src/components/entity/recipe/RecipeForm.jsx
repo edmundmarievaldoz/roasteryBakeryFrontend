@@ -60,9 +60,9 @@ function RecipeForm({ onSubmit, onCancel }) {
 
   const findUnit = (ingredientID) => {
     const ingredient = ingredients.find(
-      (item) => item.ingredientID === ingredientID,
+      (item) => Number(item.ingredientID) === Number(ingredientID),
     );
-    return ingredient ? ingredient.info.ingredientUnit : "";
+    return ingredient?.ingredientUnit ?? "";
   };
 
   const validate = () => {
