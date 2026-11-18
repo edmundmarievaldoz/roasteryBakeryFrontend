@@ -1,0 +1,109 @@
+@use "../../styles/variables" as *;
+
+.reviewRecipe {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  // RecipeIngredients has no styles of its own outside RecipeCard,
+  // so we style it here, only inside this page.
+  .recipeIngredients {
+    list-style: none;
+  }
+
+  .recipeIngredientRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid $color-border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .recipeIngredientQty {
+    font-weight: 700;
+  }
+}
+
+.reviewRecipe__back {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.reviewRecipe__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 24px;
+  align-items: start;
+
+  @media (max-width: 860px) {
+    grid-template-columns: minmax(0, 1fr); // one column on small screens
+  }
+}
+
+.reviewRecipe__details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reviewRecipe__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.reviewRecipe__title {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.reviewRecipe__createdBy {
+  color: $color-muted;
+}
+
+.reviewRecipe__section {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-card;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.reviewRecipe__subtitle {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.reviewRecipe__message {
+  color: $color-muted;
+}
+
+.reviewRecipe__success {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: $color-status-approved-tint;
+  color: $color-status-approved;
+  font-weight: 600;
+}
+
+.reviewRecipe__error {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: $color-status-rejected-tint;
+  color: $color-status-rejected;
+  font-weight: 600;
+}

@@ -1,0 +1,11 @@
+@use "../../../styles/variables" as *;
+
+.recipeAllergens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recipeAllergens__message {
+  color: $color-muted;
+}

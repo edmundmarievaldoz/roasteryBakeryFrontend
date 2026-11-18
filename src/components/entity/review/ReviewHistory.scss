@@ -1,0 +1,43 @@
+@use "../../../styles/variables" as *;
+
+.reviewHistory {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewHistory__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 0;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.reviewHistory__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reviewHistory__reviewer {
+  font-weight: 700;
+}
+
+.reviewHistory__date {
+  font-size: 13px;
+  color: $color-muted;
+}
+
+.reviewHistory__comment {
+  color: $color-ink;
+}
+
+.reviewHistory__message {
+  color: $color-muted;
+}
