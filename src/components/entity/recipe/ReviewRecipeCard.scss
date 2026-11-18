@@ -1,0 +1,42 @@
+@use "../../../styles/variables" as *;
+
+div.reviewRecipeCard {
+  height: 100%;
+
+  .reviewRecipeCard__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    height: 100%;
+  }
+
+  .reviewRecipeCard__name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .reviewRecipeCard__createdBy {
+    color: $color-muted;
+    font-size: 14px;
+  }
+
+  // Same pill look as the "+ New recipe" button on the Recipes page
+  .reviewRecipeCard__button {
+    margin-top: auto; // pushes the button to the bottom of the card
+    min-height: 40px;
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: $color-accent;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 3px;
+    }
+  }
+}

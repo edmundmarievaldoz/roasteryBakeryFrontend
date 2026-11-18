@@ -1,0 +1,31 @@
+@use "../../styles/variables" as *;
+
+// Base style: used for any status, including ones without their own colour yet
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid $color-border;
+  background: $color-ground;
+  color: $color-muted;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.statusBadge--pending {
+  border-color: transparent;
+  background: $color-status-pending-tint;
+  color: $color-status-pending;
+}
+
+.statusBadge--approved {
+  border-color: transparent;
+  background: $color-status-approved-tint;
+  color: $color-status-approved;
+}
+
+.statusBadge--rejected {
+  border-color: transparent;
+  background: $color-status-rejected-tint;
+  color: $color-status-rejected;
+}

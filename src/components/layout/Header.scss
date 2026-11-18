@@ -15,3 +15,33 @@
   font-size: 26px;
   font-weight: 800;
 }
+
+.header__nav {
+  grid-column: 3; // the right column
+  justify-self: end;
+  display: flex;
+  gap: 8px;
+}
+
+.header__link {
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  // NavLink adds the "active" class to the link of the current page
+  &.active {
+    background: $color-surface;
+    color: $color-accent;
+  }
+}
