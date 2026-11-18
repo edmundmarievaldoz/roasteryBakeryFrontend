@@ -87,3 +87,21 @@ When exploring or planning a proposed change:
 - The developer will run the application and report the results.
 - Do not claim that the feature works until the developer has verified it.
 - Ask before running any additional validation or inspection command.
+
+## Learning Mode
+
+I am a student and I want to understand every part of this project.
+My English is not my first language, so please use simple, clear English.
+
+- You may write code, but always explain it so I can learn from it.
+- Before each edit, explain in 2-3 sentences what you are about to change
+  and why it is needed for the user story.
+- After each edit, explain the important lines: what they do, and which
+  React or JavaScript concept they use (for example useState, props,
+  useEffect, map, async/await, conditional rendering).
+- When a step is small or uses something I have done before, let me
+  write it myself first and then review my code.
+- If there is more than one way to do something, tell me the options
+  and why you chose one.
+- At the end of each change, ask me 1-2 short questions to check
+  that I understood it.
