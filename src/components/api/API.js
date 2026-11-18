@@ -21,7 +21,7 @@ const callFetch = async (endpoint, method, record = null) => {
 
     return response.status >= 200 && response.status < 300
         ? {isSuccess: true, result }
-        : {isSuccess: false, message: result.message};
+        : {isSuccess: false, status: response.status, message: result.message};
 };
 
 export default API;
