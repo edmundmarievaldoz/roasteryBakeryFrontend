@@ -21,27 +21,8 @@
   color: $color-muted;
 }
 
-.recipes__back {
-  font-size: 14px;
-  font-weight: 700;
-  color: $color-accent;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
+// Only the position here. The look comes from Button (variant="primary").
 .recipes__newButton {
   align-self: flex-start;
   margin-top: 8px;
-  min-height: 44px;
-  padding: 0 22px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  background: $color-accent;
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
 }

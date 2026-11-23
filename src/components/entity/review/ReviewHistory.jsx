@@ -1,6 +1,7 @@
 import "./ReviewHistory.scss";
 import apiURL from "../../api/apiURL.js";
 import useLoad from "../../api/useLoad.js";
+import RecordsState from "../../UI/RecordsState.jsx";
 import StatusBadge from "../../UI/StatusBadge.jsx";
 
 function ReviewHistory({ recipeID }) {
@@ -12,38 +13,35 @@ function ReviewHistory({ recipeID }) {
     new Date(reviewDate.replace(" ", "T")).toLocaleDateString();
 
   // State ----------------------------------------------
-  const [reviews, loadingMessage, , errorStatus] = useLoad(reviewsEndpoint);
+  const [reviews, loadingMessage] = useLoad(reviewsEndpoint);
 
   // Handlers -------------------------------------------
   // View -----------------------------------------------
-  // 1. The API returns 404 when the recipe has no reviews yet
-  if (errorStatus === 404) {
-    return <p className="reviewHistory__message">No reviews yet</p>;
-  }
-
-  // 2. Still loading, or another error
-  if (!reviews) {
-    return <p className="reviewHistory__message">{loadingMessage}</p>;
-  }
-
-  // 3. We have reviews. The backend already sorts them newest first.
+  // The backend already sorts the reviews newest first.
   return (
-    <ul className="reviewHistory">
-      {reviews.map((review) => (
-        <li key={review.recipeReviewID} className="reviewHistory__item">
-          <div className="reviewHistory__header">
-            <span className="reviewHistory__reviewer">
-              {review.reviewerFirstName} {review.reviewerLastName}
-            </span>
-            <StatusBadge status={review.reviewStatus} />
-          </div>
-          <span className="reviewHistory__date">{formatDate(review.reviewDate)}</span>
-          {review.reviewComment && (
-            <p className="reviewHistory__comment">{review.reviewComment}</p>
-          )}
-        </li>
-      ))}
-    </ul>
+    <RecordsState
+      records={reviews}
+      loadingMessage={loadingMessage}
+      emptyMessage="No reviews yet">
+      {(list) => (
+        <ul className="reviewHistory">
+          {list.map((review) => (
+            <li key={review.recipeReviewID} className="reviewHistory__item">
+              <div className="reviewHistory__header">
+                <span className="reviewHistory__reviewer">
+                  {review.reviewerFirstName} {review.reviewerLastName}
+                </span>
+                <StatusBadge status={review.reviewStatus} />
+              </div>
+              <span className="reviewHistory__date">{formatDate(review.reviewDate)}</span>
+              {review.reviewComment && (
+                <p className="reviewHistory__comment">{review.reviewComment}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </RecordsState>
   );
 }
 

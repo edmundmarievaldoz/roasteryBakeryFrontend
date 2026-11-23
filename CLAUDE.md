@@ -13,28 +13,46 @@ No test runner is configured, and the project is plain JavaScript (no TypeScript
 
 ## Backend dependency
 
-This is the frontend only. Every view fetches from a separate REST API hardcoded in [src/components/api/apiURL.js](src/components/api/apiURL.js) as `http://localhost:5000/api`; without it running, pages hang on "Loading records..." because `useLoad` doesn't handle the rejected fetch. Endpoints in use: `/recipes`, `/ingredients`, `/recipeingredients/recipe/:recipeID`.
+This is the frontend only. Every view fetches from a separate REST API hardcoded in [src/components/api/apiURL.js](src/components/api/apiURL.js) as `http://localhost:5000/api`; without it running, pages show "Could not reach the server. Please try again later."
+
+Endpoints in use: `GET /recipes`, `GET /recipes?status=Pending`, `GET /recipes/:id`, `GET /recipes/:id/allergens`, `GET /ingredients`, `GET /recipeingredients/recipe/:recipeID`, `GET /recipereviews/recipe/:recipeID`, `POST /recipereviews`.
+
+Backend behaviour the frontend relies on: empty lists return `200 []`; a missing single record (`GET /<resource>/:id`) returns `404 { message }`; bad ids return `400 { message }`; every error body is `{ message }`; successful POSTs return `201`.
 
 ## Architecture
 
-React 19 + React Router 7 SPA. Routes are declared in [src/App.jsx](src/App.jsx), all wrapped in a single `Layout` (header, footer, background icon).
+React 19 + React Router 7 SPA. Routes are declared in [src/App.jsx](src/App.jsx), all wrapped in a single `Layout` (header, footer, background icon):
+
+- `/` → redirects to `/recipes` (`<Navigate replace />`)
+- `/recipes` → Recipes, `/recipes/new` → NewRecipe
+- `/review` → RecipesToReview, `/review/:id` → ReviewRecipe
+
+Header `NavLink`s have no `end`, so "Recipes" is active on every `/recipes...` page and "Review" on every `/review...` page. Keep new pages under one of these prefixes.
 
 `src/components/` is organised by role:
 
 - `views/` — route-level pages; own the endpoint and top-level state
-- `entity/<name>/` — domain components for one entity (currently `recipe`); new entities get a sibling folder
-- `UI/` — generic reusable pieces (`Card`, `Action`, `Icon`, `Spacer`). Compound components hang variants off the default export, e.g. `Action.Add`, `Action.Tray`, `Icon.Plus`
-- `layout/` — app chrome
+- `entity/<name>/` — domain components for one entity (`recipe`, `review`); new entities get a sibling folder
+- `UI/` — generic reusable pieces:
+  - `Button` — the shared pill button; renders a `<Link>` when given `to`, otherwise a `<button>` (default `type="button"`). `variant="primary" | "secondary" | "danger"`
+  - `BackLink` — "← Back to ..." text link at the top of a page
+  - `RecordsState` — loading / error / empty message for a list; `children` is a function called with the records
+  - `StatusBadge` (Pending / Approved / Rejected), `Tag`, `Card` / `CardContainer`
+- `layout/` — app chrome (`Header`, `Footer`, `Layout`)
 - `api/` — data access
+- `auth/` — `currentUser.js`, a hardcoded logged-in user (`userID`, names) until real login exists
 
 ### Data access
 
 All HTTP goes through two layers in `src/components/api/`:
 
-- `API.get/post/put/delete(endpoint, record)` take a **full URL** (build it with `` `${apiURL}/...` ``) and resolve to `{ isSuccess: true, result }` or `{ isSuccess: false, message }`. Check `isSuccess` rather than catching HTTP errors; only network failures reject.
-- `useLoad(endpoint)` returns `[records, loadingMessage, loadRecords]`. `records` is `null` until loaded, and on failure it stays `null` while `loadingMessage` becomes the error, so the render pattern is `if (!records) return <p>{loadingMessage}</p>`. Call `loadRecords(endpoint)` to force a reload.
+- `API.get/post/put/delete(endpoint, record)` take a **full URL** (build it with `` `${apiURL}/...` ``) and **never reject**. They resolve to `{ isSuccess: true, result }` or `{ isSuccess: false, status, message }`. A server that is down gives `status: null` and "Could not reach the server..."; a non-JSON body is handled too. Check `isSuccess` (and `status` for special cases like `409`); no `try/catch` is needed around API calls.
+- `useLoad(endpoint)` returns `[records, loadingMessage, loadRecords, errorStatus]`. `records` is `null` until loaded, and on failure it stays `null` while `loadingMessage` becomes the error. Call `loadRecords(endpoint)` to force a reload.
+- For lists, render with `RecordsState` (do not check `errorStatus` for "no records" — empty lists are `[]`):
+  `<RecordsState records={x} loadingMessage={m} emptyMessage="No ...">{(list) => list.map(...)}</RecordsState>`
+- `errorStatus` is only for single-record pages: [ReviewRecipe.jsx](src/components/views/ReviewRecipe.jsx) uses `errorStatus === 404` to show "Recipe not found".
 
-Saving is not wired up yet: `API.post/put/delete` have no callers, and `handleSubmit` in [src/components/views/NewRecipe.jsx](src/components/views/NewRecipe.jsx) only logs the recipe.
+Saving: reviews are saved with `POST /recipereviews` in [ReviewRecipe.jsx](src/components/views/ReviewRecipe.jsx) (works since CR5). Only creating a recipe is not wired up yet: `handleSubmit` in [src/components/views/NewRecipe.jsx](src/components/views/NewRecipe.jsx) only logs the recipe. When it is wired to `POST /recipes`, the body needs `recipeName` and `recipeCreatedBy: currentUser.userID` (from [currentUser.js](src/components/auth/currentUser.js)).
 
 ### Forms
 
@@ -44,6 +62,7 @@ Saving is not wired up yet: `API.post/put/delete` have no callers, and `handleSu
 
 - Component bodies are sectioned with comments in the order Initialisation / State / Handlers / View; [src/template.jsx](src/template.jsx) is the starter skeleton.
 - Each component imports its own co-located `.scss`. Class names are BEM-style (`recipeForm__row`, `recipeCard--open`).
+- A component owns its **look**; the parent owns its **position**. Use `Button` / `BackLink` / `StatusBadge` instead of copying their styles, and pass a parent class through `className` only for layout (margin, align-self).
 - Design tokens (colours, card radius) live in [src/styles/variables.scss](src/styles/variables.scss) and are pulled in with `@use "<relative path>/styles/variables" as *;`.
 - API field names are camelCase with an uppercase `ID` suffix (`recipeID`, `ingredientID`, `ingredientQuantity`).
 

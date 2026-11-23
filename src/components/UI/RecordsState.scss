@@ -1,0 +1,6 @@
+@use "../../styles/variables" as *;
+
+// The loading / error / empty message for any list
+.recordsState {
+  color: $color-muted;
+}

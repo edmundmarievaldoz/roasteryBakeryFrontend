@@ -127,24 +127,6 @@ form.recipeForm {
     gap: 12px;
   }
 
-  .recipeForm__button {
-    min-height: 44px;
-    padding: 0 22px;
-    border-radius: 999px;
-    border: 1px solid $color-border;
-    background: $color-surface;
-    color: $color-ink;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-
-    &.recipeForm__button--primary {
-      background: $color-accent;
-      border-color: $color-accent;
-      color: white;
-    }
-  }
-
   @media (max-width: 560px) {
     .recipeForm__row {
       grid-template-columns: minmax(0, 1fr) 90px 44px 44px;

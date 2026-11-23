@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout.jsx";
 import Recipes from "./components/views/Recipes.jsx";
 import NewRecipe from "./components/views/NewRecipe.jsx";
@@ -9,8 +9,11 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<Recipes />} />
-          <Route path="/new" element={<NewRecipe />} />
+          {/* "/" has no page of its own: send the user to /recipes.
+              "replace" swaps "/" out of the history, so Back does not return to it. */}
+          <Route path="/" element={<Navigate to="/recipes" replace />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/new" element={<NewRecipe />} />
           <Route path="/review" element={<RecipesToReview />} />
           <Route path="/review/:id" element={<ReviewRecipe />} />
         </Routes>

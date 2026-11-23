@@ -4,40 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
-  // RecipeIngredients has no styles of its own outside RecipeCard,
-  // so we style it here, only inside this page.
-  .recipeIngredients {
-    list-style: none;
-  }
-
-  .recipeIngredientRow {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 8px 0;
-    border-bottom: 1px solid $color-border;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .recipeIngredientQty {
-    font-weight: 700;
-  }
-}
-
-.reviewRecipe__back {
-  align-self: flex-start;
-  font-size: 14px;
-  font-weight: 700;
-  color: $color-accent;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .reviewRecipe__layout {

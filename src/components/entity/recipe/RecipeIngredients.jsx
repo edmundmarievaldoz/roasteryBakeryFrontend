@@ -1,23 +1,34 @@
+import "./RecipeIngredients.scss";
 import apiURL from "../../api/apiURL.js";
 import useLoad from "../../api/useLoad.js";
+import RecordsState from "../../UI/RecordsState.jsx";
 
-function RecipeIngredients({recipeID}) {
-    const recipeIngredientsEndpoint = `${apiURL}/recipeingredients/recipe/${recipeID}`;
-    const [ingredients, loadingMessage] = useLoad(recipeIngredientsEndpoint);
+function RecipeIngredients({ recipeID }) {
+  // Initialisation--------------------------------------
+  const recipeIngredientsEndpoint = `${apiURL}/recipeingredients/recipe/${recipeID}`;
 
-    if (!ingredients)
-        return <p>{loadingMessage}</p>;
+  // State ----------------------------------------------
+  const [ingredients, loadingMessage] = useLoad(recipeIngredientsEndpoint);
 
-    return (
+  // Handlers -------------------------------------------
+  // View -----------------------------------------------
+  return (
+    <RecordsState
+      records={ingredients}
+      loadingMessage={loadingMessage}
+      emptyMessage="No ingredients">
+      {(list) => (
         <ul className="recipeIngredients">
-            {ingredients.map((item) => (
-                <li key={item.recipeIngredientID} className="recipeIngredientRow">
-                    <span>{item.ingredientName}</span> {" "}
-                    <span className="recipeIngredientQty">{Number(item.ingredientQuantity)}</span>
-                </li>
-            ))}
+          {list.map((item) => (
+            <li key={item.recipeIngredientID} className="recipeIngredientRow">
+              <span>{item.ingredientName}</span>
+              <span className="recipeIngredientQty">{Number(item.ingredientQuantity)}</span>
+            </li>
+          ))}
         </ul>
-    );
+      )}
+    </RecordsState>
+  );
 }
 
 export default RecipeIngredients;
