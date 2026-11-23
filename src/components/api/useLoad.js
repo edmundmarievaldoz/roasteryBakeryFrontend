@@ -8,6 +8,8 @@ const useLoad = (loadEndpoint) => {
     const [loadingMessage, setLoadingMessage] = useState("Loading records...")
     const [errorStatus, setErrorStatus] = useState(null); // HTTP status of a failed load, e.g. 404
 
+    // API.get never throws: a server that is down comes back as
+    // { isSuccess: false, message: "Could not reach the server..." }
     const loadRecords = async (endpoint) => {
     const response = await API.get(endpoint);
     if (response.isSuccess) {
@@ -25,7 +27,8 @@ const useLoad = (loadEndpoint) => {
 
     //return.............................
 
-    return [records, loadingMessage, loadRecords, errorStatus];{/**we will force reload our state, hence returning it */}
+    // loadRecords is returned so a page can force a reload
+    return [records, loadingMessage, loadRecords, errorStatus];
 };
 
 export default useLoad;

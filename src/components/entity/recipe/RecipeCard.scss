@@ -45,20 +45,8 @@ div.recipeCard {
     font-weight: 700;
   }
 
+  // Only the position inside the card. The look comes from RecipeIngredients.scss
   .recipeIngredients {
-    list-style: none;
     margin-top: 16px;
-  }
-
-  .recipeIngredientsRow {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 8px 0;
-    border-bottom: 1px solid $color-border;
-  }
-
-  .recipeIngredientsQty {
-    font-weight: 700;
   }
 }

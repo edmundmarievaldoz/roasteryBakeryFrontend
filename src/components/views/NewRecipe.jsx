@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import BackLink from "../UI/BackLink.jsx";
 import RecipeForm from "../entity/recipe/RecipeForm.jsx";
 import "./Recipes.scss";
 
@@ -10,14 +11,12 @@ function NewRecipe() {
   const handleSubmit = (newRecipe) => {
     console.log("Recipe to save:", newRecipe);
   };
-  const handleCancel = () => navigate("/");
+  const handleCancel = () => navigate("/recipes");
   //View---------------------------------------------
   return (
     <section className="recipes">
       <div className="recipes__header">
-        <Link to="/" className="recipes__back">
-          Back to recipes
-        </Link>
+        <BackLink to="/recipes">Back to recipes</BackLink>
         <h1 className="recipes__title">New Recipe</h1>
         <p className="recipes__subtitle">Add one row for each ingredient.</p>
       </div>

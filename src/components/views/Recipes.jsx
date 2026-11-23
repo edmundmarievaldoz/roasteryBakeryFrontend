@@ -1,9 +1,10 @@
 import "./Recipes.scss";
-import { Link } from "react-router-dom";
 import apiURL from "../api/apiURL.js";
 import useLoad from "../api/useLoad.js";
 import { useState } from "react";
 import { CardContainer } from "../UI/Card.jsx";
+import Button from "../UI/Button.jsx";
+import RecordsState from "../UI/RecordsState.jsx";
 import RecipeCard from "../entity/recipe/RecipeCard.jsx";
 
 function Recipes() {
@@ -23,24 +24,26 @@ function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
-      <Link to="/new" className="recipes__newButton">
+      <Button to="/recipes/new" variant="primary" className="recipes__newButton">
         + New recipe
-      </Link>
-      {!recipes ? (
-        <p>{loadingMessage}</p>
-      ) : (
-        <CardContainer>
-          {recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.recipeID}
-              recipe={recipe}
-              isOpen={openRecipeID === recipe.recipeID}
-              onToggle={() => handleToggle(recipe.recipeID)}
-            />
-          ))}
-        </CardContainer>
-
-      )}
+      </Button>
+      <RecordsState
+        records={recipes}
+        loadingMessage={loadingMessage}
+        emptyMessage="No recipes yet">
+        {(list) => (
+          <CardContainer>
+            {list.map((recipe) => (
+              <RecipeCard
+                key={recipe.recipeID}
+                recipe={recipe}
+                isOpen={openRecipeID === recipe.recipeID}
+                onToggle={() => handleToggle(recipe.recipeID)}
+              />
+            ))}
+          </CardContainer>
+        )}
+      </RecordsState>
     </div>
   );
 }

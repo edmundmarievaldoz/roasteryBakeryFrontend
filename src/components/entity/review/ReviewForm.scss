@@ -51,31 +51,3 @@
   justify-content: flex-end;
   gap: 12px;
 }
-
-.reviewForm__button {
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 999px;
-  border: 1px solid $color-border;
-  background: $color-surface;
-  color: $color-ink;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-
-  &.reviewForm__button--reject {
-    border-color: $color-status-rejected;
-    color: $color-status-rejected;
-  }
-
-  &.reviewForm__button--approve {
-    background: $color-accent;
-    border-color: $color-accent;
-    color: white;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}

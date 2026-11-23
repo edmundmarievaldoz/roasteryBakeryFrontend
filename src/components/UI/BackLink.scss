@@ -1,0 +1,19 @@
+@use "../../styles/variables" as *;
+
+.backLink {
+  align-self: flex-start; // in a flex column, don't stretch to full width
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}

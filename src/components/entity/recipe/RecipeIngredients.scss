@@ -1,0 +1,22 @@
+@use "../../../styles/variables" as *;
+
+// One row per ingredient: name on the left, quantity on the right
+.recipeIngredients {
+  list-style: none;
+}
+
+.recipeIngredientRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.recipeIngredientQty {
+  font-weight: 700;
+}

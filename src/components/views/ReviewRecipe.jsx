@@ -1,10 +1,11 @@
 import "./ReviewRecipe.scss";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import API from "../api/API.js";
 import apiURL from "../api/apiURL.js";
 import useLoad from "../api/useLoad.js";
 import currentUser from "../auth/currentUser.js";
+import BackLink from "../UI/BackLink.jsx";
 import StatusBadge from "../UI/StatusBadge.jsx";
 import RecipeIngredients from "../entity/recipe/RecipeIngredients.jsx";
 import RecipeAllergens from "../entity/recipe/RecipeAllergens.jsx";
@@ -35,25 +36,21 @@ function ReviewRecipe() {
     setIsSaving(true);
     setServerError(null);
 
-    try {
-      const response = await API.post(`${apiURL}/recipereviews`, {
-        recipeID,
-        reviewerID: currentUser.userID,
-        ...decision,
-      });
+    // API.post never throws, so no try/catch is needed here
+    const response = await API.post(`${apiURL}/recipereviews`, {
+      recipeID,
+      reviewerID: currentUser.userID,
+      ...decision,
+    });
 
-      if (response.isSuccess) {
-        setSavedMessage("Review saved.");
-        refreshPage();
-      } else if (response.status === 409) {
-        setServerError("This recipe has already been reviewed");
-        refreshPage();
-      } else {
-        setServerError(response.message); // 400 and any other error
-      }
-    } catch {
-      // fetch only rejects when the server cannot be reached
-      setServerError("Could not reach the server. Please try again.");
+    if (response.isSuccess) {
+      setSavedMessage("Review saved.");
+      refreshPage();
+    } else if (response.status === 409) {
+      setServerError("This recipe has already been reviewed");
+      refreshPage();
+    } else {
+      setServerError(response.message); // 400, server down, and any other error
     }
 
     setIsSaving(false);
@@ -66,9 +63,7 @@ function ReviewRecipe() {
       return (
         <>
           <p className="reviewRecipe__success" role="status">{savedMessage}</p>
-          <Link to="/review" className="reviewRecipe__back">
-            ← Back to recipes to review
-          </Link>
+          <BackLink to="/review">Back to recipes to review</BackLink>
         </>
       );
     }
@@ -143,9 +138,7 @@ function ReviewRecipe() {
 
   return (
     <div className="reviewRecipe">
-      <Link to="/review" className="reviewRecipe__back">
-        ← Back to recipes to review
-      </Link>
+      <BackLink to="/review">Back to recipes to review</BackLink>
       {renderContent()}
     </div>
   );

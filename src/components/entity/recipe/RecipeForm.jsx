@@ -1,6 +1,7 @@
 import { useState } from "react";
 import apiURL from "../../api/apiURL.js";
 import useLoad from "../../api/useLoad.js";
+import Button from "../../UI/Button.jsx";
 import "./RecipeForm.scss";
 
 const initialRecipe = {
@@ -196,14 +197,10 @@ function RecipeForm({ onSubmit, onCancel }) {
       )}
 
       <div className="recipeForm__actions">
-        <button type="button" className="recipeForm__button" onClick={onCancel}>
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="recipeForm__button recipeForm__button--primary">
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button type="submit" variant="primary">
           Save recipe
-        </button>
+        </Button>
       </div>
     </form>
   );

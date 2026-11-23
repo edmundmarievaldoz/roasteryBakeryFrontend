@@ -15,18 +15,3 @@
   color: $color-muted;
   font-weight: 700;
 }
-
-.recipesToReview__message {
-  color: $color-muted;
-}
-
-.recipesToReview__back {
-  font-size: 14px;
-  font-weight: 700;
-  color: $color-accent;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}

@@ -1,5 +1,5 @@
 import "./ReviewRecipeCard.scss";
-import { Link } from "react-router-dom";
+import Button from "../../UI/Button.jsx";
 import { Card } from "../../UI/Card.jsx";
 import StatusBadge from "../../UI/StatusBadge.jsx";
 
@@ -17,9 +17,12 @@ function ReviewRecipeCard({ recipe }) {
           <span className="reviewRecipeCard__name">{recipe.recipeName}</span>
           <span className="reviewRecipeCard__createdBy">Created by {createdBy}</span>
           <StatusBadge status={recipe.recipeStatus} />
-          <Link to={`/review/${recipe.recipeID}`} className="reviewRecipeCard__button">
+          <Button
+            to={`/review/${recipe.recipeID}`}
+            variant="primary"
+            className="reviewRecipeCard__button">
             Review
-          </Link>
+          </Button>
         </div>
       </Card>
     </div>

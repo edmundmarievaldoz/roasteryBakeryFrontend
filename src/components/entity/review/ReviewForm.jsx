@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../UI/Button.jsx";
 import "./ReviewForm.scss";
 
 function ReviewForm({ onSubmit, serverError, isSaving }) {
@@ -69,20 +70,18 @@ function ReviewForm({ onSubmit, serverError, isSaving }) {
       )}
 
       <div className="reviewForm__actions">
-        <button
-          type="button"
-          className="reviewForm__button reviewForm__button--reject"
+        <Button
+          variant="danger"
           onClick={() => handleDecision("Rejected")}
           disabled={isSaving}>
           Reject
-        </button>
-        <button
-          type="button"
-          className="reviewForm__button reviewForm__button--approve"
+        </Button>
+        <Button
+          variant="primary"
           onClick={() => handleDecision("Approved")}
           disabled={isSaving}>
           Approve
-        </button>
+        </Button>
       </div>
     </div>
   );

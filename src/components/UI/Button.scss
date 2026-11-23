@@ -1,0 +1,47 @@
+@use "../../styles/variables" as *;
+
+// The shared pill look (works on both <a> and <button>)
+.button {
+  min-height: 44px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none; // a <Link> is an <a>, so remove the underline
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Main action on a page: "+ New recipe", "Save recipe", "Approve", "Review"
+.button--primary {
+  background: $color-accent;
+  border-color: $color-accent;
+  color: white;
+}
+
+// Less important action: "Cancel"
+.button--secondary {
+  background: $color-surface;
+  border-color: $color-border;
+  color: $color-ink;
+}
+
+// Negative action: "Reject"
+.button--danger {
+  background: $color-surface;
+  border-color: $color-status-rejected;
+  color: $color-status-rejected;
+}
